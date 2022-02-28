@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody2D _rb;
     private PlayerMovement _player;
+    private GameSession _gameSession;
 
     private float _xSpeed;
 
@@ -13,6 +14,7 @@ public class Bullet : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _player = FindObjectOfType<PlayerMovement>();
+        _gameSession = FindObjectOfType<GameSession>();
         _xSpeed = _player.transform.localScale.x * bulletSpeed;
     }
 
@@ -26,6 +28,7 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             Destroy(collision.gameObject);
+            _gameSession.AddToScore(50);
         }
 
         Destroy(gameObject);

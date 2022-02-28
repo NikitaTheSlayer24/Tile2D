@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveInput;
     private CapsuleCollider2D _capsuleCollider;
     private BoxCollider2D _boxCollider;
-    private GameSession _gameSession;
 
     private bool _playerHasHorizontalSpeed;
     private bool _isAlive = true;
@@ -28,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
         _capsuleCollider = GetComponent<CapsuleCollider2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _gravityScaleAtStart = _rb.gravityScale;
-        _gameSession = FindObjectOfType<GameSession>();
     }
 
     private void Update()
@@ -108,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             _isAlive = false;
             _animator.SetTrigger("Dying");
             _rb.velocity = deathKIck;
-            _gameSession.ProcessPlayerDeath();
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 }
